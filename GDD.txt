@@ -1,0 +1,25 @@
+Concept
+- Tank battle is an open-world head-to-head tank combat game.
+- Terrain will be used for tactical advantage.
+- Focus on flow and feel.
+
+Rules
+- Move anywhere in the terrain, surrounded by mountains.
+- Players start with finite health and ammo.
+- Each direct hit takes away health.
+- Last player standing wins.
+
+Requirements
+- SFX: Gun firing, explosion, barrel moving, turret moving,
+	engine sound.
+	
+- Static mesh: simple tank comprising tracks, body, turret
+			and barrel.
+
+- Textures: Add for visual flare.
+- Music: Background music to create tension.
+
+
+
+Iterative Cycle
+World -> Tank -> Controls -> Player 2 (AI) -> UI -> World
