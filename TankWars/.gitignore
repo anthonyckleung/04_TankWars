@@ -1,6 +1,9 @@
 # Visual Studio 2015 user specific files
 .vs/
 
+# UE4 starter content
+Content/StarterContent/*
+
 # Visual Studio 2015 database file
 *.VC.db
 
