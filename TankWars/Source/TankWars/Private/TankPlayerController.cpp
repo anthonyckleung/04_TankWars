@@ -37,7 +37,10 @@ void ATankPlayerController::AimTowardsCrosshair()
 	//Get world location through crosshair by ray tracing
 	//If it hits the landscape
 		//Tell controlled tank to aim at this point
-	GetSightRayHitLocation(HitLocation);
+	if ( GetSightRayHitLocation(HitLocation) )
+	{
+		UE_LOG( LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString() );
+	}
 }
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const
@@ -55,13 +58,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	// "de-project" the screen position of the crosshair to a world direction
 	if (GetLookDirection(ScreenLocation, WorldDirection)) 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look Location: %s"), *WorldDirection.ToString());
+		// Linetrace through along that look direction and see what was hit (up to max range)
+		 GetLookVectorHitLocation(WorldDirection, OutHitLocation);
 	}
 
-	
-
-	// Linetrace through along that look direction and see what was hit (up to max range)
 	return true;
+	
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &WorldDirection) const
@@ -69,6 +71,26 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 	FVector CameraWorldLocation; // To be discarded
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, WorldDirection);
 	
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const
+{
+	FHitResult HitResult;
+	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
+	FVector EndLocation = StartLocation + (LookDirection * LineTraceRange);
+
+	if (GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		StartLocation,
+		EndLocation,
+		ECollisionChannel::ECC_Visibility)
+		)
+	{
+		OutHitLocation = HitResult.Location;
+		return true;
+	}
+	OutHitLocation = FVector(0);
+	return false;
 }
 
 
