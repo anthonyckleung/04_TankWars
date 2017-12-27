@@ -2,6 +2,7 @@
 
 
 #include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 
 // Sets default values
@@ -14,13 +15,17 @@ ATank::ATank()
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
+void ATank::AimAt(FVector HitLocation)
+{
+	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
-
 
 
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
@@ -36,7 +41,4 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 
-void ATank::AimAt(FVector HitLocation) 
-{
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
+

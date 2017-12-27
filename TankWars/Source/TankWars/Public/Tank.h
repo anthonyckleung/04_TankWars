@@ -5,11 +5,13 @@
 
 #include "CoreMinimal.h"
 
-#include "TankAimingComponent.h"
+//#include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+//Forward declarations
 class UTankBarrel;
+class UTankAimingComponent;
 
 UCLASS()
 class TANKWARS_API ATank : public APawn
@@ -39,6 +41,6 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; //Some sensible starting value of 1km/s. Actually, I have no idea (TODO)
+	float LaunchSpeed = 10000; //Some sensible starting value of 1km/s. Actually, I have no idea (TODO)
 	
 };

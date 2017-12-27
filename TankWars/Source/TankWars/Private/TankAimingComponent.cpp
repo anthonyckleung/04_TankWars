@@ -48,12 +48,14 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
+		auto Time = GetWorld()->GetTimeSeconds();
 		//UE_LOG(LogTemp, Warning, TEXT("Firing at: %s"), *AimDirection.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("%f: Soln found!"), Time);
 	}
 	else
 	{
-		//auto Time = GetWorld()->GetTimeSeconds();
-		//UE_LOG(LogTemp, Warning, TEXT("No solns found"));
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: No solns found"), Time);
 	}
 }
 
@@ -66,7 +68,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	//UE_LOG( LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString() );
 
-	Barrel->Elevate(5);
+	Barrel->Elevate(1);
 
 }
 

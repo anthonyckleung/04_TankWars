@@ -2,11 +2,12 @@
 
 #pragma once
 
-#include "Tank.h"
+
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
+class ATank;
 /**
  * 
  */
@@ -27,12 +28,12 @@ private:
 	
 
 	void AimTowardsCrosshair(); //Moves tank barrel so that a shot would hit where the crosshair aims at.
-	bool GetSightRayHitLocation(FVector &OutHitLocation) const;  //Return an OUT parameter, true if hit landscape
+	bool GetSightRayHitLocation(FVector &HitLocation) const;  //Return an OUT parameter, true if hit landscape
 	bool GetLookDirection(FVector2D ScreenLocation, FVector &WorldDirection) const;
-	bool GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
 
 	UPROPERTY(EditAnywhere)
-	float LineTraceRange = 10000000; //10 km
+	float LineTraceRange = 1000000; //10 km
 
 	UPROPERTY( EditAnywhere )
 	float CrossHairXLocation = 0.5f;
