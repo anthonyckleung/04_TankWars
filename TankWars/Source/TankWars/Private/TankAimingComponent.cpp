@@ -50,6 +50,11 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		MoveBarrelTowards(AimDirection);
 		//UE_LOG(LogTemp, Warning, TEXT("Firing at: %s"), *AimDirection.ToString());
 	}
+	else
+	{
+		//auto Time = GetWorld()->GetTimeSeconds();
+		//UE_LOG(LogTemp, Warning, TEXT("No solns found"));
+	}
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
