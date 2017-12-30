@@ -15,7 +15,9 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	//No need to protect pointers as added at construction
-	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	//TankAimingComponent->Initialize(Barrel, Turret);
+
 }
 
 void ATank::AimAt(FVector HitLocation)
@@ -23,33 +25,7 @@ void ATank::AimAt(FVector HitLocation)
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
-// Called when the game starts or when spawned
-void ATank::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
 
-
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
-	Barrel = BarrelToSet;
-}
-
-void ATank::SetTurretReference(UTankTurret* TurretToSet)
-{
-	TankAimingComponent->SetTurretReference(TurretToSet);
-}
-
-
-
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
 
 
 void ATank::Fire()
