@@ -20,12 +20,11 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
 
 private:
-	ATank* GetControlledTank() const;
-	
-	
-	
 
 	void AimTowardsCrosshair(); //Moves tank barrel so that a shot would hit where the crosshair aims at.
 	bool GetSightRayHitLocation(FVector &HitLocation) const;  //Return an OUT parameter, true if hit landscape
