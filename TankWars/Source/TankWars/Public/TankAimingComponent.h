@@ -30,7 +30,6 @@ class TANKWARS_API UTankAimingComponent : public UActorComponent
 
 public:	
 	// Sets default values for this component's properties
-	
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);

@@ -11,7 +11,6 @@
 
 //Forward declarations
 class UTankBarrel;
-class UTankTurret;
 class UTankAimingComponent;
 class UTankMovementComponent;
 class AProjectile;
@@ -22,10 +21,10 @@ class TANKWARS_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	
 
 	void AimAt(FVector HitLocation);
+	virtual void BeginPlay();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
@@ -39,6 +38,7 @@ protected:
 	UTankMovementComponent * TankMovementComponent = nullptr;
 
 private:	
+	// Sets default values for this pawn's properties
 	ATank();
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
@@ -52,7 +52,7 @@ private:
 
 	// Local barrel pointer reference
 	UTankBarrel* Barrel = nullptr; //TODO remove
-	UTankTurret* Turret = nullptr;
+	//UTankTurret* Turret = nullptr;
 
 	double LastFireTime = 0;
 	
