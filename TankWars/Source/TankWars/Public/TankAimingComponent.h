@@ -32,9 +32,6 @@ class TANKWARS_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 
-
-	
-
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
@@ -46,13 +43,18 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Aiming;
+	EFiringState FiringState = EFiringState::Reloading;
 
 
 private:	
 	UTankAimingComponent();
 
 	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
