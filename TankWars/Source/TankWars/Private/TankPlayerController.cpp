@@ -23,11 +23,11 @@ void ATankPlayerController::Tick( float DeltaTime )
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
+	if (!GetPawn()) { return; } // e.g. if not possessing
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 
 	FVector HitLocation; //Out parameter
-	//UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"),*HitLocation.ToString() );
 
 	//Get world location through crosshair by ray tracing
 	//If it hits the landscape
