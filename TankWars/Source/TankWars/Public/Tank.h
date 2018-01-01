@@ -5,13 +5,11 @@
 
 #include "CoreMinimal.h"
 
-//#include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
 //Forward declarations
 class UTankBarrel;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -22,17 +20,13 @@ class TANKWARS_API ATank : public APawn
 public:
 	
 
-	void AimAt(FVector HitLocation);
+	
 	virtual void BeginPlay();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 	
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent * TankAimingComponent = nullptr;
-	
 
 private:	
 	// Sets default values for this pawn's properties
