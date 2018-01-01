@@ -3,7 +3,6 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
 
@@ -23,6 +22,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP BeginPlay to Run
+
+	TankAimingComponent = FindComponentByClass < UTankAimingComponent>();
 }
 
 
