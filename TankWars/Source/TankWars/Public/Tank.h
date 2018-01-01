@@ -9,8 +9,6 @@
 #include "Tank.generated.h"
 
 //Forward declarations
-class UTankBarrel;
-class AProjectile;
 
 UCLASS()
 class TANKWARS_API ATank : public APawn
@@ -23,8 +21,7 @@ public:
 	
 	virtual void BeginPlay();
 
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void Fire();
+	
 	
 
 
@@ -32,8 +29,7 @@ private:
 	// Sets default values for this pawn's properties
 	ATank();
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
+	
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
@@ -41,10 +37,11 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
+	double LastFireTime = 0;
 	// Local barrel pointer reference
-	UTankBarrel* Barrel = nullptr; //TODO remove
+	
 	//UTankTurret* Turret = nullptr;
 
-	double LastFireTime = 0;
+	
 	
 };
