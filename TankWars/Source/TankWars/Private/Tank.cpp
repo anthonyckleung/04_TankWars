@@ -3,6 +3,8 @@
 
 #include "Tank.h"
 
+
+
 // Sets default values
 ATank::ATank()
 {
@@ -13,6 +15,21 @@ ATank::ATank()
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 	//TankAimingComponent->Initialize(Barrel, Turret);
 
+}
+
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	int DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
+
+	CurrentHealth -= DamageToApply;
+	//if (CurrentHealth <= 0)
+	return DamageToApply;
+}
+
+float ATank::GetHealthPercent() const
+{
+	return (float) CurrentHealth / (float) StartingHealth;
 }
 
 

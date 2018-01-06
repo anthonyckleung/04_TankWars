@@ -9,6 +9,8 @@
 #include "Particles/ParticleSystem.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Engine/EngineTypes.h"
+#include "Kismet/GameplayStatics.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -30,8 +32,11 @@ protected:
 private:
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
-	
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float DestroyDelay = 10.f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 10.f;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* CollisionMesh = nullptr;
@@ -47,6 +52,8 @@ private:
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void OnTimerExpire();
 
 
 	
