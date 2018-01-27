@@ -4,11 +4,11 @@
 
 
 #include "CoreMinimal.h"
-
 #include "GameFramework/Pawn.h"
+#include "Camera/CameraShake.h"
 #include "Tank.generated.h"
 
-//Forward declarations
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 
 UCLASS()
 class TANKWARS_API ATank : public APawn
@@ -25,6 +25,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetHealthPercent() const;
 
+	UPROPERTY(EditAnywhere, Category = "Camera Shake")
+	TSubclassOf<UCameraShake> CameraShake;
+
+	FTankDelegate OnDeath;
 
 private:	
 	// Sets default values for this pawn's properties
@@ -34,7 +38,7 @@ private:
 	int StartingHealth = 100.f;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int CurrentHealth = StartingHealth;
+	int CurrentHealth ; // Initialized in BeginPlay
 
 	
 	

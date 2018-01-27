@@ -22,8 +22,17 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AC
 	int DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
 	int DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 
+	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	if (PC != nullptr && CameraShake != nullptr)
+	{
+		PC->ClientPlayCameraShake(CameraShake, 1);
+	}
+
 	CurrentHealth -= DamageToApply;
-	//if (CurrentHealth <= 0)
+	if (CurrentHealth <= 0) //When dead
+	{
+		OnDeath.Broadcast();
+	}
 	return DamageToApply;
 }
 
@@ -37,7 +46,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP BeginPlay to Run
 
-	
+	CurrentHealth = StartingHealth;
 }
 
 

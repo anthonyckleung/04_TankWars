@@ -27,6 +27,8 @@ protected:
 
 private:
 
+	virtual void SetPawn(APawn* InPawn) override;
+
 	void AimTowardsCrosshair(); //Moves tank barrel so that a shot would hit where the crosshair aims at.
 	bool GetSightRayHitLocation(FVector &HitLocation) const;  //Return an OUT parameter, true if hit landscape
 	bool GetLookDirection(FVector2D ScreenLocation, FVector &WorldDirection) const;
@@ -40,4 +42,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairYLocation = 0.3333f;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };
