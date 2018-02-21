@@ -26,7 +26,7 @@ public:
 	float GetHealthPercent() const;
 
 	UPROPERTY(EditAnywhere, Category = "Camera Shake")
-	TSubclassOf<UCameraShake> CameraShake;
+	TSubclassOf<UCameraShake> CameraShake; // Set cameraShake bp in TankbP
 
 	FTankDelegate OnDeath;
 

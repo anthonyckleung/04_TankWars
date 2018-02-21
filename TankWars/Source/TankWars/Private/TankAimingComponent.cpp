@@ -33,6 +33,7 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
+	//Set FiringState 
 	if (RoundsLeft <= 0)
 	{
 		FiringState = EFiringState::OutOfAmmo;
@@ -83,6 +84,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel -> GetSocketLocation( FName("Projectile") );
 
+	
 	bool b_HaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
 		(
 			this,
@@ -95,15 +97,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 			0,
 			ESuggestProjVelocityTraceOption::DoNotTrace
 		);
+	
 	// Calculate the OutLaunchVelocity
-
-	if( b_HaveAimSolution )
+	if( b_HaveAimSolution ) //If soln is found
 	{
 		AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
-		//auto Time = GetWorld()->GetTimeSeconds();
-		//UE_LOG(LogTemp, Warning, TEXT("Firing at: %s"), *AimDirection.ToString());
-		//UE_LOG(LogTemp, Warning, TEXT("%f: Soln found!"), Time);
 	}
 
 }
@@ -116,8 +115,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-
-	//UE_LOG( LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString() );
 
 	Barrel->Elevate(DeltaRotator.Pitch);
 
@@ -136,10 +133,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 void UTankAimingComponent::Fire()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Fire!"));
 
 	if (FiringState == EFiringState::Locked || FiringState == EFiringState::Aiming)
 	{
+		//Protect pointers
 		if (!ensure(Barrel)) { return; }
 		if (!ensure(ProjectileBlueprint)) { return; }
 

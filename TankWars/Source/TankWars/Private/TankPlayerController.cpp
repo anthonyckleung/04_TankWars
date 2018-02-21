@@ -38,7 +38,6 @@ void ATankPlayerController::SetPawn(APawn * InPawn)
 
 void ATankPlayerController::OnPossessedTankDeath()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Received!"))
 	StartSpectatingOnly();
 }
 
@@ -66,8 +65,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-
-	//UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString() );
 	
 	
 	FVector WorldDirection; //Unit vector in the direction we are looking.

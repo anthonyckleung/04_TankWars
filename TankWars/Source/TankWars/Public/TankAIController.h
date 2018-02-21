@@ -18,7 +18,7 @@ class TANKWARS_API ATankAIController : public AAIController
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float AcceptanceRadius = 4000;
+	float AcceptanceRadius = 6000; //Default value
 
 private:
 	virtual void BeginPlay() override;

@@ -36,16 +36,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-
-	void AimAt(FVector HitLocation);
-
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
-
-	EFiringState GetFiringState() const;
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	int GetRoundsLeft() const;
+
+	EFiringState GetFiringState() const;
+	
+	void AimAt(FVector HitLocation);
+
+	
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")

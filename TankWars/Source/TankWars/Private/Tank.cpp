@@ -23,16 +23,19 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AC
 	int DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 
 	APlayerController* PC = GetWorld()->GetFirstPlayerController();
-	if (PC != nullptr && CameraShake != nullptr)
-	{
-		PC->ClientPlayCameraShake(CameraShake, 1);
-	}
+	
 
 	CurrentHealth -= DamageToApply;
 	if (CurrentHealth <= 0) //When dead
 	{
 		OnDeath.Broadcast();
 	}
+
+	if (PC != nullptr && CameraShake != nullptr)
+	{
+		PC->ClientPlayCameraShake(CameraShake, 1); //Play camera shake
+	}
+
 	return DamageToApply;
 }
 
